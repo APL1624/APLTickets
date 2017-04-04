@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:background="@color/color_white">
+
+    <ImageView
+        android:id="@+id/found_circle_detail_board_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/found_circle_detail_board_title"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:text="新影速递"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textColor="@color/color_gray_3"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical|right"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/found_circle_detail_board_people"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="人数:1367"
+            android:gravity="right"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/found_circle_detail_board_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="帖子:1367"
+            android:gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

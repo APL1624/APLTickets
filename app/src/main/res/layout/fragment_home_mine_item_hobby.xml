@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="121dp">
+
+
+    <RelativeLayout
+        android:id="@+id/mine_item_hobby__want_to_see_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:id="@+id/mine_item_hobby_want_to_see"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="20dp"
+            android:src="@mipmap/mine_icon_want_to_see"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/mine_item_hobby_want_to_see"
+            android:gravity="center_vertical"
+            android:text="想看的电影"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:src="@mipmap/icon_arrow_right"/>
+    </RelativeLayout>
+    <View
+        android:id="@+id/mine_item_hobby__want_to_see_collection"
+        android:layout_marginLeft="60dp"
+        android:layout_below="@+id/mine_item_hobby__want_to_see_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_d"/>
+    <RelativeLayout
+        android:id="@+id/mine_item_hobby_collection_view"
+        android:layout_below="@id/mine_item_hobby__want_to_see_collection"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/mine_item_hobby_collection"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="20dp"
+            android:src="@mipmap/mine_icon_collections"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/mine_item_hobby_collection"
+            android:gravity="center_vertical"
+            android:text="我的收藏"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:src="@mipmap/icon_arrow_right"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

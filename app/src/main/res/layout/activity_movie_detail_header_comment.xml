@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="65dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_gray_d"/>
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="55dp"
+        android:text="最新评论"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:textColor="@color/color_gray_3"
+        android:drawableLeft="@mipmap/movie_detail_drawable_left"/>
+
+</LinearLayout>

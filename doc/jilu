@@ -1,0 +1,54 @@
+①修改项目包名
+在清单文件中 shift + F6 修改项目包名
+②No address associated with hostname
+清单文件没有配置网络访问权限
+③ Caused by: java.lang.IllegalArgumentException: Target must not be null.
+发现Picasso 的image为null 就会抛回此异常
+④onCheckChanged 要先判断是选中还是没选中(选中没选中都会走此监听回调)
+void onMovieTitleCheckChanged(CompoundButton buttonView, boolean isChecked){
+        if (isChecked){
+
+        }
+}
+⑤关于搭建框架
+   - radioButton + Fragment 布局使用FrameLayout,动态加载切换Fragment
+    动态切换Fragment的步骤
+    ①定义RadioButton和Fragment
+    ②给每个RadioButton设置监听,当选中某一个RadioButton时,切换显示
+    ③切换显示
+        隐藏当前显示的 : transaction.hide()
+        显示将要显示的 : 缓存的逻辑
+            先去fm中根据tag找
+                找到 : 直接transaction.show
+                找不到 : 根据tag Class.forName(tag).newInstance()生成,add到transaction中
+                注意 : add是要加container,fragment,tag!!! → 只有这里是真正创建fragment的地方(其他都是走fm的缓存)
+
+   -关于topbar
+   如果topbar布局相似,topbar写在activity里,visbility控制显示与隐藏
+   如果topbar布局不相似,topbar应该写在fragment里,通过transaction动态控制显示与隐藏
+
+   -关于动画
+   Fragment本身是不能加动画的,但是fragment所在帧布局是可以加动画的;
+   补间动画只能控制中心点,不能控制中心轴;
+   属性动画可以控制中心点,也可以控制中心轴;
+
+   -3.26-
+   ①提问 : 为什么bottom radioButton会有声音?
+   ②NullPointerException: Attempt to invoke interface method 'rx.Observable com.apl.ticket.ui.home.contract.MovieHotContract$Model.getHom
+   发现没有在fragment中初始化presenter,也就是presenter中的model和view为空
+   注意 : 在activity和fragment中
+            实现View接口 - activity与presenter交流
+            初始化presenter - 脑袋上声明<M,P>泛型,拿到presenter和model的实例
+                            - 初始化presenter中的VM,mPresenter.setVM(view,model)
+   ③加载主页面时
+   本来想封装RecyclerView的多布局适配器,但是发现封装的时候,ButterKnife的BindView用不上
+   就不知道咋封装了...
+   ④切换显示模式是一个旋转的过程,出现了一个很奇葩的bug
+   反转了 : 在反面看就是正的,所以考虑是角度写反了,一检查果然是
+   ⑤Retrofit返回字符串：
+   .addConverterFactory(ScalarsConverterFactory.create())替换 .addConverterFactory(GsonConverterFactory.create())
+   依赖 compile 'com.squareup.retrofit2:converter-scalars:2.2.0'
+   ⑥：①，②..搜狗输入法
+   ⑦：JSON字符串【【】】：解决：List<List<>>或者原生
+
+

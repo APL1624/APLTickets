@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <LinearLayout
+        android:id="@+id/theatre_detail_linear_item_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="2dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="21:20"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22:50结束" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/theatre_detail_linear_item_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/theatre_detail_linear_item_one"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/theatre_detail_linear_item_one"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="国语2D"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1号厅" />
+    </LinearLayout>
+
+
+    <Button
+
+        android:id="@+id/theatre_detail_linear_item_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="#e6430d"
+        android:text="选座"
+        android:textColor="#ffffff"
+        android:layout_marginRight="5dp"/>
+
+    <LinearLayout
+        android:id="@+id/theatre_detail_linear_item_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/theatre_detail_linear_item_one"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@id/theatre_detail_linear_item_btn"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="￥53.9"
+            android:textSize="16sp"
+            android:textColor="#f5a03e"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥80" />
+            <View
+                android:layout_width="30dp"
+                android:layout_height="2dp"
+                android:background="#000000"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

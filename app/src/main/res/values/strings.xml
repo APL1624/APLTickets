@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">APLTicket</string>
+    <string name="activity_home_location">北京</string>
+    <string name="home_movie_hot">热映</string>
+    <string name="home_movie_preview">预告</string>
+    <string name="home_cinema_title">影院</string>
+    <string name="movie">电影</string>
+</resources>

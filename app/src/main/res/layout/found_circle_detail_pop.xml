@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/color_white">
+
+    <RadioButton
+        android:id="@+id/found_circle_detail_replay"
+        android:text="最新回复"
+        style="@style/found_circle_detail_pop" />
+
+    <RadioButton
+        android:id="@+id/found_circle_detail_publish"
+        android:text="最新发表"
+        style="@style/found_circle_detail_pop" />
+
+    <RadioButton
+        android:id="@+id/found_circle_detail_interest"
+        android:text="我的关注"
+        style="@style/found_circle_detail_pop" />
+
+</RadioGroup>

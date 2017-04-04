@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white">
+
+    <include layout="@layout/cinema_display_range" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/cinema_display_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <FrameLayout
+            android:id="@+id/cinema_cover_control_hide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/cinema_cover_range"
+                layout="@layout/cinema_cover_range"/>
+
+            <include
+                android:id="@+id/cinema_cover_series"
+                layout="@layout/cinema_cover_series"
+                android:visibility="gone"/>
+
+            <com.apl.ticket.widget.CinemaCover
+                android:id="@+id/custom_cinema_cover_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

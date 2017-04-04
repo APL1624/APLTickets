@@ -1,0 +1,138 @@
+①修改项目包名
+在清单文件中 shift + F6 修改项目包名
+②No address associated with hostname
+清单文件没有配置网络访问权限
+③ Caused by: java.lang.IllegalArgumentException: Target must not be null.
+发现Picasso 的image为null 就会抛回此异常
+④onCheckChanged 要先判断是选中还是没选中(选中没选中都会走此监听回调)
+void onMovieTitleCheckChanged(CompoundButton buttonView, boolean isChecked){
+        if (isChecked){
+
+        }
+}
+⑤关于搭建框架
+   - radioButton + Fragment 布局使用FrameLayout,动态加载切换Fragment
+    动态切换Fragment的步骤
+    ①定义RadioButton和Fragment
+    ②给每个RadioButton设置监听,当选中某一个RadioButton时,切换显示
+    ③切换显示
+        隐藏当前显示的 : transaction.hide()
+        显示将要显示的 : 缓存的逻辑
+            先去fm中根据tag找
+                找到 : 直接transaction.show
+                找不到 : 根据tag Class.forName(tag).newInstance()生成,add到transaction中
+                注意 : add是要加container,fragment,tag!!! → 只有这里是真正创建fragment的地方(其他都是走fm的缓存)
+
+   -关于topbar
+   如果topbar布局相似,topbar写在activity里,visbility控制显示与隐藏
+   如果topbar布局不相似,topbar应该写在fragment里,通过transaction动态控制显示与隐藏
+
+   -关于动画
+   Fragment本身是不能加动画的,但是fragment所在帧布局是可以加动画的;
+   补间动画只能控制中心点,不能控制中心轴;
+   属性动画可以控制中心点,也可以控制中心轴;
+
+   -3.26-
+   ①提问 : 为什么bottom radioButton会有声音?
+   ②NullPointerException: Attempt to invoke interface method 'rx.Observable com.apl.ticket.ui.home.contract.MovieHotContract$Model.getHom
+   发现没有在fragment中初始化presenter,也就是presenter中的model和view为空
+   注意 : 在activity和fragment中
+            实现View接口 - activity与presenter交流
+            初始化presenter - 脑袋上声明<M,P>泛型,拿到presenter和model的实例
+                            - 初始化presenter中的VM,mPresenter.setVM(view,model)
+   ③加载主页面时
+   本来想封装RecyclerView的多布局适配器,但是发现封装的时候,ButterKnife的BindView用不上
+   就不知道咋封装了...
+   ④切换显示模式是一个旋转的过程,出现了一个很奇葩的bug
+   反转了 : 在反面看就是正的,所以考虑是角度写反了,一检查果然是
+
+   -3.27 周一-
+   ①RecyclerView的横向滑动时,图片怎么也加载不出来,后来发现错误竟然是updateRes时方法名写错了,巨坑呀;
+   为什么会出现这个错误?
+   还没有确定数据源是啥就开始写adapter导致真正加载数据后,发现javaBeen又要改,这一改就很容易出错
+   所以 : 以后在写RecyclerView的adapter时,一定要先确定javabeen数据源是啥再写
+   (ps.这个错误时打log打出来的,发现getItemCount为0!)
+   ②RecyclerView的布局管理器,有三种,设置方法时,必须使用其中一种,而不能使用它们的父类
+   LinearLayoutManager
+   GridLayoutManger
+   StaggeredGridLayoutManager
+   ③坑 : 不要看到一个图就是imageView,后来你发现,它是会变的,才发现是有选中和未选中状态
+
+-3.28周二-
+①Logger工具
+②android的国际化
+ values-zh  中国(只要strings就行)
+ values-ja
+ ....
+ (会根据系统语言环境自动选择语言包)
+ 可视化编辑,translationEditor
+ ③EventBus 是一个组件间通信的框架
+ 是一个发布者与订阅者的模型
+
+ 使用分三步:
+    ①定义事件(我们需要传递的数据)
+    ②注册订阅者
+    -   使用@Subscribe注解修饰方法,接收事件
+    -   在声明周期中注册与反注册EventBus
+    ③发布事件
+④MediaPlayer在设置相同的uri时会报ioException
+    MediaPlayer: setDataSource: IOException! uri=https://flv.bn.netease.com/videolib3/1702/23/pylMR6572/HD/pylMR6572-mobile.mp4
+    java.io.FileNotFoundException: No content provider: https://flv.bn.netease.com/videolib3/1702/23/pylMR6572/HD/pylMR6572-mobile.mp4
+    在视频停止播放时,释放videoView的资源
+    videoView.suspend()
+
+-4.3- 周一.
+①PopWindow最外层的布局参数是不生效的,必须在child里设置好宽高.另外横向纵向布局都可以用RecyclerView来做
+②一个类中只能注入一次,就是只能有一个view.findViewById()
+    一个类中view只能有一个
+    所以,在一个类中创建PopWindow,PopWindow中的childView是不能绑定ButterKnife的,只能findViewById,除非提出去,成为一个单独的view类
+③适配器中使用eventBus
+    在onAttachToRecyclerView中注册
+    在onDetachToRecyclerView中取消注册
+④activity 向 fragment传值
+    sticky方式 一注册,就能接收到
+    普通方式 只要注册过,就能收到
+    注意 : 根据WHAT字段来区分想要接收的数据
+eventBus 在activity和fragment之间传值,比接口回调好用,没有延时
+⑤SwipeRefreshLayout
+    下拉刷新
+    setRefreshListener() ... onRefresh() → 在下拉时调用(手势控制调用)
+    setRefresh(boolean ...) 设置开始刷新或结束刷新 → 我们自己程序去请求数据时用
+注意 : setRefresh(true) 并不会调用onRefresh方法!
+
+    上拉加载
+    RecyclerView ListView 的Adapter中设置加载的标记位isLoadMore
+    添加onScrollListener() 三个判断条件 不刷新,不加载,到底部(加一条,是上拉状态)(layoutManager.findLastVisibleItem == adapte.getItemCount() + 1- headerCount)
+    设置标记位
+⑥PopWindow
+    详细见博客:......
+    new PopWindow(contentView,width,height) 一般都用三个参数的构造
+    showAsDropDown()
+    dismiss()
+⑦朋友圈九宫格 详见博客
+⑧RecyclerView的多布局
+    重写getItemViewType()方法 很自由,想返回什么type都可以,比如加header,直接判断position = 0,return 0;这就是一种布局
+    多种布局有多个ViewHolder,使用ButterKnife注入每一个布局的itemView,HeadViewHolder,FootViewHolder...
+⑨RecyclerView的监听事件
+    直接在Adapter中的onClick里根据id区分,itemView就是default没有id的
+①给RecyclerView添加分割线 重写ItemDecoration类
+    onDraw → 在childView画出来之前绘制
+    onDrawOver → 在childView画出来之后绘制
+    getItemOffsets → 给recOut 控制childView的间隔
+    (将背景设置成灰色,在设置childView的间距,就有灰色的线了!)
+
+①①使用GsonFormat插件 → 生成JavaBeen
+    alt + insert → GsonFormat
+
+-4.4 周二-
+1.git的使用
+    红色 : 没有添加版本追踪,add to vcs(在项目 上右击)
+    绿色 : 添加到版本控制,但是还没有提交
+    蓝色 : 被修改过
+    黑色 : 无修改
+    从gitHub上下载远程仓库到本地,使用studio打开一个已有项目.
+    打开时记得add to root(root路径改变成为了git);忘记也没关系,file → invalidate caches and restart;
+    然后,所有的代码都正常了.
+    推代码 : 先更新,然后推到本地仓库(不需要网络),再push到gitHub(需要网络,在项目上右击)
+    (需要配置gitHub账号密码等)
+

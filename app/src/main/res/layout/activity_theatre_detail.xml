@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_theatre_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.apl.ticket.ui.threatredetail.TheatreDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/location_fqc_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/theatre_detail_back"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:src="@mipmap/location_pal_back" />
+
+        <TextView
+            android:id="@+id/theatre_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="嘉华国际影城（圣熙店）"
+            android:textColor="@color/colorTextBackThree"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:id="@+id/theatre_detail_item_one_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:text="嘉华国际影城（圣熙店）"
+                    android:textColor="#000000"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/theatre_detail_item_one_address"
+                    android:text="8.8分"
+                    android:textColor="#f00" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/color_gray_2"
+                android:clipChildren="false"
+                android:gravity="center_vertical">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/theatre_detail_item_one_gallery"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="280dp"
+                    android:clipChildren="false"></android.support.v4.view.ViewPager>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_below="@id/theatre_detail_item_one_gallery"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="280dp"
+                    android:background="#ff8800" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/theatre_detail_item_movie_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:text="嫌疑人X的现身"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/theatre_detail_item_movie_show_time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <LinearLayout
+                android:id="@+id/theatre_detail_item_movie_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

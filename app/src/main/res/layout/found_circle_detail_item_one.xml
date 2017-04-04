@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/found_circle_detail_item_one"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/color_gray_e">
+
+        <ImageView
+            android:id="@+id/circle_item_user_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/circle_item_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="入人家"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/circle_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:textColor="@color/color_gray_3"
+                android:text="flasdjajdklfj;adljkfimfj jljlmjkdsfjdjf;ajdjladkjf;lkdjfa;jfkladfjkdajf;ladfkjdlf;kajfl;kajdfkadl;fjkdajfkjdjflajdkfja;ldkjf;klajdfkldjf"
+                android:layout_marginTop="10dp"/>
+
+            <com.apl.ticket.widget.circlecustomimage.NineGridlayout
+                android:id="@+id/circle_item_nine_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+            <com.apl.ticket.widget.circlecustomimage.CustomImageView
+                android:id="@+id/circle_item_custom_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/circle_item_time"
+                    android:text="1年前"
+                    android:layout_weight="3"
+                    style="@style/found_circle_item_content" />
+
+                <TextView
+                    android:id="@+id/circle_item_share"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/icon_share"
+                    style="@style/found_circle_item_content" />
+
+                <TextView
+                    android:id="@+id/circle_item_like"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/icon_notlike"
+                    android:text="45"
+                    style="@style/found_circle_item_content" />
+
+                <TextView
+                    android:id="@+id/circle_item_comment"
+                    android:layout_weight="1"
+                    android:drawableLeft="@mipmap/icon_comment"
+                    android:text="61"
+                    style="@style/found_circle_item_content" />
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray_d"/>
+
+</LinearLayout>
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_found_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_alpha_6"
+    tools:context="com.apl.ticket.ui.home.FoundPagerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/activity_found_pager_btn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/title_icon_close"
+            android:layout_marginLeft="15dp"
+            />
+
+        <TextView
+            android:id="@+id/activity_found_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="致所有有梦想的人"
+            android:textColor="@color/color_black"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color_alpha_6"/>
+
+    <WebView
+        android:id="@+id/activity_found_pager_web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

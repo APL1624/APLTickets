@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/movie_detail_image"
+            android:layout_width="100dp"
+            android:layout_height="130dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/splash_test" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical">
+
+            <!--TODO 评分带星的bulabula -->
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:text="主演:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/movie_detail_actors"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:lineSpacingExtra="5dp"
+            android:maxLines="2"
+            android:layout_marginLeft="10dp"
+            android:text="艾玛·沃森 丹·史蒂文斯 卢克·伊万斯 艾玛·汤普森 乔什·盖德艾玛·沃森 丹·史蒂文斯 卢克·伊万斯 艾玛·汤普森 乔什·盖德"
+            android:textColor="@color/color_gray_6"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="剧情:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/movie_detail_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingExtra="5dp"
+            android:maxLines="2"
+            android:layout_marginLeft="10dp"
+            android:text="贝儿的父亲不小心闯进了野兽的领地，被囚禁在野兽的城堡里。为了救出父亲，贝儿只身犯险，答应与野兽同居于古堡并以此换回父亲。然而，贝儿因为一心想念着父亲，所以生活的并不愉快。贝儿找到机会逃走，可是却遇到了凶狠的狼群。危难关头，野兽及时出现解救了贝儿，自己却受了伤，贝儿心存感动，细心照顾野兽。此后，加斯顿因为追求贝儿失败，而设计让村民一起杀死野兽。贝儿伤心的亲吻了死去的野兽。而野兽则因为这个吻，解除了自己的诅咒，重新复活并变回了原来的人性。"
+            android:textColor="@color/color_gray_6"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/movie_detail_open_description"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:button="@null"
+        android:scaleType="center"
+        android:src="@mipmap/icon_arrow_down_3"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_gray_d"/>
+
+</LinearLayout>

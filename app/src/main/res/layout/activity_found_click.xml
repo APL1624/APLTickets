@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_found_click"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_rounded_rectangle"
+    tools:context="com.apl.ticket.ui.home.FoundClickActivity">
+
+    <RelativeLayout
+        android:id="@+id/found_click_linear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/color_white"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/found_click_return_btn"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/icon_back"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/found_click_title"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/color_black"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/found_click_login_btn"
+            android:layout_width="25dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/circle_user_center_icon"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/found_click_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/found_click_linear"
+        android:layout_marginTop="2dp"/>
+
+</RelativeLayout>

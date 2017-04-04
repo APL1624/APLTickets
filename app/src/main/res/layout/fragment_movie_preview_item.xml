@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="160dp">
+    <include
+        layout="@layout/fragment_home_movie_preview_head" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <ImageView
+            android:id="@+id/pre_item_image"
+            android:layout_width="80dp"
+            android:layout_height="110dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/pre_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="金刚:骷髅岛"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:textSize="18sp"
+            android:textColor="@color/color_black"
+            android:layout_alignTop="@id/hot_item_image"
+            android:layout_toRightOf="@id/pre_item_image"/>
+
+        <ImageView
+            android:id="@+id/pre_item_new_movie"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/cinema_item_upcoming_movie"
+            android:scaleType="center"
+            android:layout_marginTop="5dp"
+            android:layout_alignTop="@id/pre_item_title"
+            android:layout_toRightOf="@id/pre_item_title"
+            android:visibility="gone"
+
+           />
+
+        <TextView
+            android:id="@+id/pre_item_highlight"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="绝境崛起,大有不同"
+            android:textSize="13sp"
+            android:textColor="@color/color_gray_6"
+            android:paddingTop="15dp"
+            android:layout_alignLeft="@id/pre_item_title"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/pre_item_screenings"
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:text="今天89家影院放映1254场"
+            android:textSize="14sp"
+            android:textColor="@color/color_gray_6"
+            android:layout_alignLeft="@id/pre_item_title"
+            android:layout_alignBottom="@id/pre_item_image"/>
+
+
+        <TextView
+            android:id="@+id/pre_item_grade"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:text="7.6分"
+            android:textSize="12sp"
+            android:textColor="@color/colorOrange"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/pre_item_buy_ticket"
+            android:layout_width="70dp"
+            android:layout_height="26dp"
+            android:text="选座购票"
+            android:textColor="@color/color_white"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:background="@drawable/hot_item_buy_selector"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
