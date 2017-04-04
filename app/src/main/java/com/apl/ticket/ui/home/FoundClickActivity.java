@@ -1,6 +1,5 @@
 package com.apl.ticket.ui.home;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -11,10 +10,8 @@ import android.widget.TextView;
 import com.apl.ticket.R;
 import com.apl.ticket.R2;
 import com.apl.ticket.ui.home.fragment.FoundCircleFragment;
-import com.apl.ticket.ui.home.fragment.FoundCircleFragmnet;
 import com.apl.ticket.ui.home.fragment.FoundLifeFragment;
 import com.apl.ticket.ui.home.fragment.FoundReadFragment;
-import com.orhanobut.logger.Logger;
 import com.vittaw.mvplibrary.base.BaseActivity;
 
 import butterknife.BindView;
@@ -62,7 +59,6 @@ public class FoundClickActivity extends BaseActivity implements View.OnClickList
                 mTitle.setText("圈子");
                 loginBtn.setVisibility(View.VISIBLE);
                 transaction.add(R.id.found_click_framelayout,new FoundCircleFragment());
-                transaction.add(R.id.found_click_framelayout,new FoundCircleFragmnet());
                 break;
             case 3:
                 mTitle.setText("乐得没好生活");
