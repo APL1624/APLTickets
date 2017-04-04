@@ -1,5 +1,6 @@
 package com.apl.ticket.ui.home.fragment;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,6 +13,7 @@ import com.apl.ticket.R;
 import com.apl.ticket.R2;
 import com.apl.ticket.been.CinemaClassifyBeen;
 import com.apl.ticket.been.cinema.CinemaListBeen;
+import com.apl.ticket.ui.cinema.CinemaActivity;
 import com.apl.ticket.ui.home.EventBus.CinemaEvent;
 import com.apl.ticket.ui.home.EventBus.EventWhat;
 import com.apl.ticket.ui.home.adapter.CinemaAdapter;
@@ -85,14 +87,20 @@ public class CinemaFragment extends BaseFragment<CinemaModel,CinemaPresenter> im
         mListView.setAdapter(mAdapter);
         mListView.setTextFilterEnabled(true);
 
+        String movieId = "";
+        if (getArguments() != null){
+            Bundle bundle = getArguments();
+            movieId = (String) bundle.get(CinemaActivity.MOVIE_ID);
+        }
         mPresenter.getCinemaListBeen(getQueryMap());
-        mPresenter.getCinemaClassifyBeen(getClassifyMap());
+        mPresenter.getCinemaClassifyBeen(getClassifyMap(movieId));
     }
 
-    private Map<String, String> getClassifyMap() {
+    private Map<String, String> getClassifyMap(String movieId) {
         //http://piao.163.com/m/base_data.html?city=110000
         Map<String,String> map = new HashMap<>();
         map.put("city","110000");
+        map.put("movie_id",movieId);
         return map;
     }
 

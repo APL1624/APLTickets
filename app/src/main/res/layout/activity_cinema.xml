@@ -1,19 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_cinema"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.apl.ticket.ui.cinema.CinemaActivity">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/home_top_cinema"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="放映影院"
-        android:gravity="center"/>
+        android:layout_height="55dp"
+        android:background="@color/color_white">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/cinema_back"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/location_pal_back"/>
+
+        <ImageView
+            android:id="@+id/cinema_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/icon_main_search" />
+
+        <ImageView
+            android:id="@+id/cinema_location"
+            style="@style/home_location_image"
+            android:src="@mipmap/icon_main_location" />
+
+        <TextView
+            android:id="@+id/cinema_title"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="影院"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/cinema_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

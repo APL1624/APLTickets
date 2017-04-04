@@ -1,5 +1,6 @@
 package com.apl.ticket.ui.moviedetail;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
@@ -34,6 +35,7 @@ import com.apl.ticket.ui.moviedetail.contract.MovieDetailContract;
 import com.apl.ticket.ui.moviedetail.model.MovieDetailModel;
 import com.apl.ticket.ui.moviedetail.presenter.MovieDetailPresenter;
 import com.apl.ticket.widget.CustomVideoView;
+import com.apl.ticket.widget.RatingBar;
 import com.squareup.picasso.Picasso;
 import com.vittaw.mvplibrary.base.BaseActivity;
 import com.vittaw.mvplibrary.utils.ScreenUtil;
@@ -103,6 +105,7 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     private View mVideoHeader;
     private int mVideoHeight;
     private boolean isLandscape;
+    private RatingBar mRatingBar;
 
     @Override
     public int getLayoutId() {
@@ -162,9 +165,9 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == SCROLL_STATE_IDLE){
                     Log.e(TAG, "onScrollStateChanged: " + mBottomFloat );
-                    mBottomFloat.setVisibility(View.VISIBLE);
+                    ObjectAnimator.ofFloat(mBottomFloat,"TranslationY",1000,0).setDuration(2000).start();
                 }else{
-                    mBottomFloat.setVisibility(View.GONE);
+                    ObjectAnimator.ofFloat(mBottomFloat,"TranslationY",0,1000).setDuration(2000).start();
                 }
             }
 
@@ -193,6 +196,18 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
         mOpenDescription = (ImageView) descriptionHeader.findViewById(R.id.movie_detail_open_description);
         mOpenDescription.setOnClickListener(this);
         mDescriptionImage = descriptionHeader.findViewById(R.id.movie_detail_image);
+        mRatingBar = ((RatingBar) descriptionHeader.findViewById(R.id.rb));
+
+//        mRatingBar.setClickable(true);//设置可否点击
+//        mRatingBar.setStar(2.5f);//设置显示的星星个数
+//        mRatingBar.setStepSize(RatingBar.StepSize.Half);//设置每次点击增加一颗星还是半颗星
+//        mRatingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+//            @Override
+//            public void onRatingChange(float ratingCount) {//点击星星变化后选中的个数
+//                Log.d("RatingBar","RatingBar-Count="+ratingCount);
+//            }
+//        });
+
     }
 
     @Override
@@ -220,6 +235,8 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     private void updateMovieDescription(HomeDetailBeen homeDetailBeen) {
         mActors.setText(homeDetailBeen.getObject().getActors());
         mDescrioption.setText(homeDetailBeen.getObject().getDescription());
+        int rating = Integer.parseInt(homeDetailBeen.getObject().getGrade()) / 10;
+        mRatingBar.setStar(rating);//设置显示的星星个数
     }
 
     @Override

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,9 +21,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="15dp">
 
             <!--TODO 评分带星的bulabula -->
+            <com.apl.ticket.widget.RatingBar
+                android:id="@+id/rb"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                app:starCount="5"
+                app:starEmpty="@mipmap/rating_star_grey"
+                app:starFill="@mipmap/rating_star"
+                app:starHalf="@mipmap/rating_star_grey"
+                app:starImageSize="15dp"
+                app:starPadding="5dp"
+                app:starStep="1.5"
+                app:stepSize="Half"/>
+
 
         </LinearLayout>
     </LinearLayout>
