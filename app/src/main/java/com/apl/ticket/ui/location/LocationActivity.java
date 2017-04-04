@@ -77,6 +77,7 @@ public class LocationActivity extends BaseActivity<LocationPresenter,LocationMod
 
     @Override
     public void initView() {
+
         cityInfo = new ArrayList<>();
         mAdapter=new LocationAdapter(cityInfo,this);
         layoutManager = new LinearLayoutManager(this);

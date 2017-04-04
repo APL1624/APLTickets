@@ -11,6 +11,7 @@ import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.vittaw.mvplibrary.base.BaseFragment;
 
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 

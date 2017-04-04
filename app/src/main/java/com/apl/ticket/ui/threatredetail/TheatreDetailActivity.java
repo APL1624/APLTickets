@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,6 +52,8 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
     TabLayout mTabLayout;
     @BindView(R2.id.theatre_detail_item_movie_item)
     LinearLayout mLinearLayout;
+    @BindView(R2.id.theatre_detail_back)
+    ImageView mBack;
 
     @Override
     public int getLayoutId() {
@@ -68,6 +71,7 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
         map.put("cinema_id","4989");
         map.put("city","370300");
         mPresenter.getThreatreBean(map);
+        mBack.setOnClickListener(this);
 
 
     }
@@ -154,6 +158,9 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
             case R.id.theatre_detail_linear_item_btn:
                 startActivity(new Intent(this, SelectSeat.class));
                 Log.e(TAG,"btn");
+                break;
+            case R.id.theatre_detail_back:
+                finish();
                 break;
         }
     }

@@ -29,60 +29,50 @@ public class MoviePreviewAdapter extends ListViewBaseAdapter<HomePageBeen.HPData
 
 
         View view = holder.findView(R.id.pre_head);
-        if (position == 0) {
+        if (position == 0 || position == 3) {
             view.setVisibility(View.VISIBLE);
-            if (position == 0 || position == 3) {
-                view.setVisibility(View.VISIBLE);
-                if (position == 3) {
-                    int sum = 0;
-                    for (int i = 0; i < data.size(); i++) {
-                        if (data.get(position).getReleaseDate().substring(5, 7).equals(data.get(i).getReleaseDate().substring(5, 7))) {
-                            sum++;
-                        }
+            if (position == 3) {
+                int sum = 0;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(position).getReleaseDate().substring(5, 7).equals(data.get(i).getReleaseDate().substring(5, 7))) {
+                        sum++;
                     }
-                    holder.setText(R.id.pre_head_text, data.get(position).getReleaseDate().substring(5, 7) + "月上映 （" + sum + "）部");
                 }
+                holder.setText(R.id.pre_head_text, data.get(position).getReleaseDate().substring(5, 7) + "月上映 （" + sum + "）部");
+            }
+        } else {
+            if (TextUtils.equals(data.get(position).getReleaseDate().substring(5, 7), data.get(position - 1).getReleaseDate().substring(5, 7))) {
+                view.setVisibility(View.GONE);
             } else {
-                if (TextUtils.equals(data.get(position).getReleaseDate().substring(5, 7), data.get(position - 1).getReleaseDate().substring(5, 7))) {
-                    view.setVisibility(View.GONE);
-                } else {
-                    int sum = 0;
-                    for (int i = 0; i < data.size(); i++) {
-                        if (data.get(position).getReleaseDate().substring(5, 7).equals(data.get(i).getReleaseDate().substring(5, 7))) {
-                            sum++;
-                        } else {
-
-                        }
+                int sum = 0;
+                for (int i = 0; i < data.size(); i++) {
+                    if (data.get(position).getReleaseDate().substring(5, 7).equals(data.get(i).getReleaseDate().substring(5, 7))) {
+                        sum++;
+                    } else {
                     }
-                    holder.setText(R.id.pre_head_text, data.get(position).getReleaseDate().substring(5, 7) + "月上映 （" + sum + "）部");
-                    view.setVisibility(View.VISIBLE);
                 }
+                holder.setText(R.id.pre_head_text, data.get(position).getReleaseDate().substring(5, 7) + "月上映 （" + sum + "）部");
+                view.setVisibility(View.VISIBLE);
             }
-            ImageView image = (ImageView) holder.findView(R.id.pre_item_image);
-            Picasso.with(context).load(data.get(position).getLogo()).into(image);
-            holder.setText(R.id.pre_item_title, data.get(position).getName());
-            holder.setText(R.id.pre_item_highlight, data.get(position).getHighlight());
-            holder.setText(R.id.pre_item_screenings, data.get(position).getScreenings());
-            holder.setText(R.id.pre_item_buy_ticket, "查看影讯");
-            holder.setText(R.id.pre_item_grade, data.get(position).getNotifyCount());
-            holder.setText(R.id.pre_item_grade, data.get(position).getGrade() + "分");
-            if (!data.get(position).getIsScheduleSupport().equals("0")) {
-                holder.findView(R.id.pre_item_new_movie).setVisibility(View.VISIBLE);
-            }
-            holder.findView(R.id.pre_item_buy_ticket).setOnClickListener(this);
-
         }
-
-
-//    @Override
-//    public void onClick(View view) {
-////        context.startActivity(new Intent(context, TheatreDetailActivity.class));
-//        context.startActivity(new Intent(context, TheatreDetailActivity.class));
-//    }
+        ImageView image = (ImageView) holder.findView(R.id.pre_item_image);
+        Picasso.with(context).load(data.get(position).getLogo()).into(image);
+        holder.setText(R.id.pre_item_title, data.get(position).getName());
+        holder.setText(R.id.pre_item_highlight, data.get(position).getHighlight());
+        holder.setText(R.id.pre_item_screenings, data.get(position).getScreenings());
+        holder.setText(R.id.pre_item_buy_ticket, "查看影讯");
+        holder.setText(R.id.pre_item_grade, data.get(position).getNotifyCount());
+        holder.setText(R.id.pre_item_grade, data.get(position).getGrade() + "分");
+        if (!data.get(position).getIsScheduleSupport().equals("0")) {
+            holder.findView(R.id.pre_item_new_movie).setVisibility(View.VISIBLE);
+        }
+        holder.findView(R.id.pre_item_buy_ticket).setOnClickListener(this);
+        holder.findView(R.id.pre_item_buy_ticket).setTag(position);
     }
+
 
     @Override
     public void onClick(View v) {
-        context.startActivity(new Intent(context, TheatreDetailActivity.class));
+
     }
 }

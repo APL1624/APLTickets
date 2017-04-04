@@ -1,5 +1,6 @@
 package com.apl.ticket.ui.location.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.apl.ticket.R;
 import com.apl.ticket.R2;
 import com.apl.ticket.api.LocationApi;
 import com.apl.ticket.been.location.LocationCityBean;
+import com.apl.ticket.ui.location.LocationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,8 +101,9 @@ public class LocationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onClick(View view) {
-        int childAdapterPosition = mRecyclerView.getChildAdapterPosition(view);
-        Log.e(TAG,cityInfo.get(childAdapterPosition).getFirstName());
+     /*   int childAdapterPosition = mRecyclerView.getChildAdapterPosition(view);
+        Log.e(TAG,cityInfo.get(childAdapterPosition).getFirstName());*/
+        ((LocationActivity)context).finish();
 
 
     }

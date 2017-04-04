@@ -2,6 +2,7 @@ package com.apl.ticket.ui.home.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Filter;
@@ -9,6 +10,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import com.apl.ticket.R;
 import com.apl.ticket.been.cinema.CinemaBeen;
+import com.apl.ticket.ui.threatredetail.TheatreDetailActivity;
 import com.orhanobut.logger.Logger;
 import com.vittaw.mvplibrary.adapter.ListViewBaseAdapter;
 import com.vittaw.mvplibrary.utils.DistanceUtil;
@@ -16,17 +18,19 @@ import com.vittaw.mvplibrary.utils.DistanceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Filterable{
+public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Filterable, View.OnClickListener {
 
     private List<CinemaBeen> backData;//备份数据源
 
     private MyFilter myFilter;
+    Context context;
 
     public CinemaAdapter(Context context, List<CinemaBeen> data, int layoutResId) {
         super(context, data, layoutResId);
         if (data != null){
             backData = data;    //第一次传入的data是null
         }
+        this.context=context;
     }
 
     @Override
@@ -60,6 +64,7 @@ public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Fi
         }else if ("1".equals(cinemaBeen.getIsCouponSupport())){
             holder.findView(R.id.cinema_quan).setVisibility(View.VISIBLE);
         }
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +73,11 @@ public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Fi
             myFilter = new MyFilter();
         }
         return myFilter;
+    }
+
+    @Override
+    public void onClick(View view) {
+        context.startActivity(new Intent(context, TheatreDetailActivity.class));
     }
 
     private class MyFilter extends Filter{

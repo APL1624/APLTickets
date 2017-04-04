@@ -21,9 +21,10 @@
            android:text="我的订单"/>
        <ImageView
            android:layout_width="20dp"
-           android:layout_height="20dp"
+           android:layout_height="15dp"
+           android:layout_centerVertical="true"
            android:layout_alignParentRight="true"
-           android:layout_margin="20dp"
+           android:layout_margin="15dp"
            android:src="@mipmap/icon_arrow_right"/>
    </RelativeLayout>
     <View
@@ -54,9 +55,10 @@
             android:text="我的优惠劵"/>
         <ImageView
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_margin="20dp"
+            android:layout_margin="15dp"
             android:src="@mipmap/icon_arrow_right"/>
     </RelativeLayout>
     <View
@@ -85,8 +87,9 @@
             android:gravity="center_vertical"
             android:text="我的积分"/>
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_margin="20dp"
             android:src="@mipmap/icon_arrow_right"/>

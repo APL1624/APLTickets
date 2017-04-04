@@ -113,6 +113,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter,SplashModel> im
     public void onAnimationEnd(Animator animation) {
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

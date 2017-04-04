@@ -1,5 +1,6 @@
 package com.apl.ticket.ui.home;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
@@ -59,6 +60,7 @@ public class FoundClickActivity extends BaseActivity implements View.OnClickList
                 mTitle.setText("圈子");
                 loginBtn.setVisibility(View.VISIBLE);
                 transaction.add(R.id.found_click_framelayout,new FoundCircleFragment());
+
                 break;
             case 3:
                 mTitle.setText("乐得没好生活");

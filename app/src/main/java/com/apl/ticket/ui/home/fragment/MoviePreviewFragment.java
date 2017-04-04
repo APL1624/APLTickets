@@ -98,7 +98,6 @@ public class MoviePreviewFragment extends BaseFragment<HomePageModel, HomePagePr
     @Override
     public void onScroll(AbsListView absListView, int i, int i1, int i2) {
         if (i != 0) {
-//            if (!TextUtils.equals(mAdapter.getItem(i).getReleaseDate().substring(5, 7), mAdapter.getItem(i - 1).getReleaseDate().substring(5, 7))) {
             if (i == 3 || !TextUtils.equals(mAdapter.getItem(i).getReleaseDate().substring(5, 7), mAdapter.getItem(i - 1).getReleaseDate().substring(5, 7))
                     || !TextUtils.equals(mAdapter.getItem(i).getReleaseDate().substring(5, 7), mAdapter.getItem(i + 1).getReleaseDate().substring(5, 7))) {
                 int sum = 0;
