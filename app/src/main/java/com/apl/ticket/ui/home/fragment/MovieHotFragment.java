@@ -15,6 +15,7 @@ import com.apl.ticket.ui.home.contract.MovieHotContract;
 import com.apl.ticket.ui.home.model.HomePageModel;
 import com.apl.ticket.ui.home.presenter.HomePagePresenter;
 import com.vittaw.mvplibrary.base.BaseFragment;
+import com.vittaw.mvplibrary.utils.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,7 +24,6 @@ import butterknife.BindView;
 public class MovieHotFragment extends BaseFragment<HomePageModel,HomePagePresenter> implements MovieHotContract.View {
 
     public static final String TAG = MovieHotFragment.class.getName();
-    private ProgressDialog progressDialog;
 
     @BindView(R2.id.home_movie_hot_recycler_view)
     RecyclerView mRecyclerView;
@@ -57,29 +57,17 @@ public class MovieHotFragment extends BaseFragment<HomePageModel,HomePagePresent
     public void returnHomePageBeen(HomePageBeen homePageBeen) {
         Log.e(TAG, "returnHomePageBeen: " + homePageBeen.getList().size() );
 
-        //发送sticky的event
-        MovieHotLargeEvent movieHotLargeEvent = new MovieHotLargeEvent(EventWhat.GET_HOME_PAGE_BEEN);
-        movieHotLargeEvent.setHomePageBeen(homePageBeen);
-//        EventBus.getDefault().postSticky(movieHotLargeEvent);
-        EventBus.getDefault().post(movieHotLargeEvent);
-
         mAdapter.updateResAll(homePageBeen.getList());
     }
 
     @Override
     public void onStartLoad() {
-        //TODO 后面还有一个theme字段,可以设置样式吧,有时间探究一下
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setIndeterminate(true);//不确定的,无限循环的
-        progressDialog.setMessage("正在加载中...");
-        progressDialog.setCancelable(true);//设置为可以取消的
-//        progressDialog.setFeatureDrawable();//自定义的方法...
-        progressDialog.show();
+        LoadingDialog.showDialogForLoading(getActivity());
     }
 
     @Override
     public void onStopLoad() {
-        progressDialog.cancel();
+        LoadingDialog.cancelDialogForLoading();
     }
 
     @Override

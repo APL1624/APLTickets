@@ -9,8 +9,8 @@
     </style>
 
     <style name="home_location_image">
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:layout_marginRight">60dp</item>
         <item name="android:layout_gravity">right|center_vertical</item>
     </style>

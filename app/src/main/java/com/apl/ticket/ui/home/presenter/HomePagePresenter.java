@@ -22,6 +22,7 @@ public class HomePagePresenter extends MovieHotContract.Presenter {
 
     @Override
     public void getHomePageBeen(final String type, String city) {
+        mView.onStartLoad();
         mModel.getHomePageBeen(type,city).subscribe(new Subscriber<HomePageBeen>() {
             @Override
             public void onCompleted() {
@@ -46,6 +47,7 @@ public class HomePagePresenter extends MovieHotContract.Presenter {
 
             }
         });
+        mView.onStopLoad();
     }
     public HomePageBeen getNewHomePageBeen(HomePageBeen homePageBeen){
         List<HomePageBeen.HPData> list = homePageBeen.getList();

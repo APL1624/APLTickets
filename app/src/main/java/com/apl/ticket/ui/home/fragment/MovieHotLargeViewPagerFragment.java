@@ -18,9 +18,6 @@ import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 
-/**
- * Created by Administrator on 2017/3/28.
- */
 
 public class MovieHotLargeViewPagerFragment extends BaseFragment {
 
@@ -48,6 +45,6 @@ public class MovieHotLargeViewPagerFragment extends BaseFragment {
         String imageUrl = bundle.getString(IMAGE_URL);
 
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Picasso.with(getActivity()).load(imageUrl).into(imageView);
+        Picasso.with(getActivity()).load(imageUrl).placeholder(getResources().getDrawable(R.mipmap.default_movie)).into(imageView);
     }
 }

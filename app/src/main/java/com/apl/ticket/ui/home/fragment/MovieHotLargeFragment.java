@@ -4,6 +4,7 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,21 @@ import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apl.ticket.R;
 import com.apl.ticket.R2;
 import com.apl.ticket.been.HomePageBeen;
 import com.apl.ticket.ui.home.EventBus.EventWhat;
 import com.apl.ticket.ui.home.EventBus.MovieHotLargeEvent;
+import com.apl.ticket.ui.home.contract.MovieHotContract;
+import com.apl.ticket.ui.home.model.HomePageModel;
+import com.apl.ticket.ui.home.presenter.HomePagePresenter;
 import com.apl.ticket.ui.home.transformer.ScaleTransformer;
 import com.orhanobut.logger.Logger;
 import com.vittaw.mvplibrary.adapter.CommonFragmentPagerAdapter;
 import com.vittaw.mvplibrary.base.BaseFragment;
+import com.vittaw.mvplibrary.utils.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,16 +41,19 @@ import butterknife.BindView;
  * Created by Administrator on 2017/3/25 0025.
  */
 
-public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnPageChangeListener, View.OnTouchListener {
+public class MovieHotLargeFragment extends BaseFragment<HomePageModel, HomePagePresenter> implements MovieHotContract.View, ViewPager.OnPageChangeListener, View.OnTouchListener {
+
+    private String city = "110000";
+    private String type = "0";
 
     public static final String TAG = MovieHotLargeFragment.class.getName();
+
     private HomePageBeen mData;
 
     @BindView(R2.id.home_movie_hot_viewPager)
     ViewPager mViewPager;
 
     private CommonFragmentPagerAdapter adapter;
-    private int pagerWidth;
 
     @Override
     protected int getLayoutId() {
@@ -53,6 +62,7 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
 
     @Override
     protected void initPresenter() {
+        mPresenter.setVM(this, mModel);
     }
 
     @BindView(R2.id.home_movie_hot_relativelayout)
@@ -60,26 +70,25 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
 
     @Override
     protected void initView() {
+        mPresenter.getHomePageBeen(String.valueOf(type), String.valueOf(city));
 
-        adapter = new CommonFragmentPagerAdapter(getActivity().getSupportFragmentManager(),null);
+        adapter = new CommonFragmentPagerAdapter(getActivity().getSupportFragmentManager(), null);
         mViewPager.setOffscreenPageLimit(3);
         int widthPixels = (int) getResources().getDisplayMetrics().widthPixels;
-        pagerWidth = ((int) (getResources().getDisplayMetrics().widthPixels * 3.0f / 4.0f));
-        ViewGroup.LayoutParams mViewpageParams = mViewPager.getLayoutParams();
-        if (mViewpageParams == null) {
-            mViewpageParams = new ViewGroup.LayoutParams(pagerWidth, ViewGroup.LayoutParams.MATCH_PARENT);
-            Logger.e("宽度",pagerWidth);
+        int pagerWidth = ((int) (getResources().getDisplayMetrics().widthPixels * 4.0f / 5.0f));
+        ViewGroup.LayoutParams params = mViewPager.getLayoutParams();
+        if (params == null) {
+            params = new ViewGroup.LayoutParams(pagerWidth, ViewGroup.LayoutParams.MATCH_PARENT);
         } else {
-            mViewpageParams.width =pagerWidth;
+            params.width = pagerWidth;
         }
-        mViewPager.setLayoutParams(mViewpageParams);
+        mViewPager.setLayoutParams(params);
         mViewPager.setPageMargin(-50);
-//        mRelativeLayout.setOnTouchListener(this);
-        mViewPager.setTranslationX((widthPixels-pagerWidth)/2-10);
-        mViewPager.setPageTransformer(true,new ScaleTransformer());
+        mViewPager.setTranslationX((widthPixels - pagerWidth) / 2 - 10);
+//        mViewPager.setPageTransformer(true, new ScaleTransformer());
         mViewPager.setAdapter(adapter);
         mViewPager.addOnPageChangeListener(this);
-
+        showButton();
     }
 
     @BindView(R2.id.home_movie_hot_btn)
@@ -94,42 +103,11 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
         mButtonLook.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        showButton();
-        if (!EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().register(this);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (EventBus.getDefault().isRegistered(this)) {
-            EventBus.getDefault().unregister(this);
-        }
-    }
-
-    @Subscribe(sticky = true)
-    public void onEvent(MovieHotLargeEvent movieHotLargeEvent){
-        switch (movieHotLargeEvent.WHAT) {
-            case EventWhat.GET_HOME_PAGE_BEEN:
-                mData= movieHotLargeEvent.getHomePageBeen();
-                Logger.e("数据",mData);
-                adapter.updateRes(getData());
-                mViewPager.setCurrentItem(1,false);
-                setTextView(1);
-                break;
-        }
-    }
-
 
     private List<Fragment> getData() {
         List<Fragment> data=new ArrayList<>();
         if (mData!=null) {
             for (int i = 0; i < mData.getList().size()+2; i++) {
-//                Picasso.with(getActivity()).load(mData.getList().get(i).getLogo3()).into(imageView);
                 String logo3 = "";
                 if (i==0){
                     logo3 = mData.getList().get(mData.getList().size() - 1).getLogo3();
@@ -146,7 +124,6 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
 
             }
         }
-        Logger.e("数据",data);
         return data;
     }
 
@@ -175,10 +152,10 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
             setTextView(position);
             if (position == mViewPager.getAdapter().getCount() - 1) {
                 // 将位置滚动到第二个元素
-                mViewPager.setCurrentItem(1,false);
+                mViewPager.setCurrentItem(1, false);
             } else if (position == 0) {
                 // 将位置滚动到倒数第二个元素
-                mViewPager.setCurrentItem(mViewPager.getAdapter().getCount() - 2,false);
+                mViewPager.setCurrentItem(mViewPager.getAdapter().getCount() - 2, false);
             }
         }
     }
@@ -187,28 +164,52 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
     TextView title;
     @BindView(R2.id.home_movie_hot_resurt)
     TextView resurt;
-     @BindView(R2.id.home_movie_hot_content)
+    @BindView(R2.id.home_movie_hot_content)
     TextView content;
 
     private void setTextView(int position) {
         int size = mData.getList().size();
-        if (position==0){
-            title.setText(mData.getList().get(size -1).getName());
-            resurt.setText(mData.getList().get(size-1).getGrade());
-            content.setText(mData.getList().get(size-1).getHighlight());
-        }else if (position==size+1){
+        if (position == 0) {
+            title.setText(mData.getList().get(size - 1).getName());
+            resurt.setText(mData.getList().get(size - 1).getGrade());
+            content.setText(mData.getList().get(size - 1).getHighlight());
+        } else if (position == size + 1) {
             title.setText(mData.getList().get(0).getName());
             resurt.setText(mData.getList().get(0).getGrade());
             content.setText(mData.getList().get(0).getHighlight());
-        }else{
-            title.setText(mData.getList().get(position-1).getName());
-            resurt.setText(mData.getList().get(position-1).getGrade());
-            content.setText(mData.getList().get(position-1).getHighlight());
+        } else {
+            title.setText(mData.getList().get(position - 1).getName());
+            resurt.setText(mData.getList().get(position - 1).getGrade());
+            content.setText(mData.getList().get(position - 1).getHighlight());
         }
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        return  mViewPager.dispatchTouchEvent(motionEvent);
+        return mViewPager.dispatchTouchEvent(motionEvent);
+    }
+
+    @Override
+    public void returnHomePageBeen(HomePageBeen homePageBeen) {
+        mData = homePageBeen;
+        Logger.e("HotLarge的数据" + mData.getList().size());
+        adapter.updateRes(getData());
+        mViewPager.setCurrentItem(1, false);
+        setTextView(1);
+    }
+
+    @Override
+    public void onStartLoad() {
+        LoadingDialog.showDialogForLoading(getActivity());
+    }
+
+    @Override
+    public void onStopLoad() {
+        LoadingDialog.cancelDialogForLoading();
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+        Toast.makeText(getActivity(), "网络出错了!", Toast.LENGTH_SHORT).show();
     }
 }
