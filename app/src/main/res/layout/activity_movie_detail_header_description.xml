@@ -32,11 +32,44 @@
                 app:starCount="5"
                 app:starEmpty="@mipmap/rating_star_grey"
                 app:starFill="@mipmap/rating_star"
-                app:starHalf="@mipmap/rating_star_grey"
+                app:starHalf="@mipmap/rating_star"
                 app:starImageSize="15dp"
                 app:starPadding="5dp"
                 app:starStep="1.5"
                 app:stepSize="Half"/>
+
+            <TextView
+                android:id="@+id/movie_detail_description_type"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:textSize="14sp"
+                android:text="喜剧"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/movie_detail_description_type_shape"/>
+
+            <TextView
+                android:id="@+id/movie_detail_description_duration"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="时长 : 1小时33分钟"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:id="@+id/movie_detail_description_editor"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="导演 : 袁杰"
+                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"/>
 
 
         </LinearLayout>

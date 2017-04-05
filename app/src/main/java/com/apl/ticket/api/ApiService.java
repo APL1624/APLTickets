@@ -115,9 +115,6 @@ public interface ApiService {
     Observable<FoundImageBeen> getFoundImageBeen(@QueryMap Map<String ,String> map);
 
 
-//    @GET("/m/cinema/ticket.html")
-//    Observable<ThreatreBean> getThreatreBeen(@QueryMap Map<String ,String> map);
-
     /**
      * http://qz.dianying.163.com
      * /circle_getBoardList

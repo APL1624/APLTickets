@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -36,8 +37,10 @@ import com.apl.ticket.ui.moviedetail.model.MovieDetailModel;
 import com.apl.ticket.ui.moviedetail.presenter.MovieDetailPresenter;
 import com.apl.ticket.widget.CustomVideoView;
 import com.apl.ticket.widget.RatingBar;
+import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.vittaw.mvplibrary.base.BaseActivity;
+import com.vittaw.mvplibrary.utils.LoadingDialog;
 import com.vittaw.mvplibrary.utils.ScreenUtil;
 import com.vittaw.mvplibrary.utils.TimeUtil;
 
@@ -69,25 +72,25 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     private TextView mActors;
     private TextView mDescrioption;
     private ImageView mOpenDescription;
-    private View mDescriptionImage;
+    private ImageView mDescriptionImage;
 
     @BindView(R2.id.movie_detail_video_share)
     ImageView mVideoBack;
 
-    @BindView(R2.id.movie_detail_video_play)
-    ImageView mVideoPlay;
+//    @BindView(R2.id.movie_detail_video_play)
+//    ImageView mVideoPlay;
 
     @BindView(R2.id.movie_detail_video_view)
     CustomVideoView mVideoView;
 
-    @BindView(R2.id.movie_detail_video_title)
-    TextView mVideoTitle;
+//    @BindView(R2.id.movie_detail_video_title)
+//    TextView mVideoTitle;
 
-    @BindView(R2.id.movie_detail_video_movie_time)
-    TextView mMovieTime;
-
-    @BindView(R2.id.movie_detail_video_country)
-    TextView mVideoCountry;
+//    @BindView(R2.id.movie_detail_video_movie_time)
+//    TextView mMovieTime;
+//
+//    @BindView(R2.id.movie_detail_video_country)
+//    TextView mVideoCountry;
 
 //    @BindView(R2.id.movie_detail_video_share)
 //    ImageView mVideoShare;
@@ -98,14 +101,21 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     @BindView(R2.id.movie_detail_float)
     LinearLayout mBottomFloat;
 
-    @BindView(R2.id.movie_detail_video_image)
-    ImageView mVideoImageSmall;
+//    @BindView(R2.id.movie_detail_video_image)
+//    ImageView mVideoImageSmall;
 
 
     private View mVideoHeader;
     private int mVideoHeight;
     private boolean isLandscape;
     private RatingBar mRatingBar;
+    private TextView mVideoTitle;
+    private TextView mMovieTime;
+    private TextView mVideoCountry;
+    private ImageView mVideoImage;
+    private TextView mDescriptionType;
+    private TextView mDescriptionDuration;
+    private TextView mDescriptionEditor;
 
     @Override
     public int getLayoutId() {
@@ -160,21 +170,28 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     private void initVideoHeader() {
         mVideoHeader = inflater.inflate(R.layout.activity_movie_detail_header_video,null,false);
         mListView.addHeaderView(mVideoHeader);
+        mVideoTitle = ((TextView) mVideoHeader.findViewById(R.id.movie_detail_video_title));
+        mMovieTime = ((TextView) mVideoHeader.findViewById(R.id.movie_detail_video_movie_time));
+        mVideoCountry = ((TextView) mVideoHeader.findViewById(R.id.movie_detail_video_country));
+        mVideoHeader.findViewById(R.id.movie_detail_play).setOnClickListener(this);
+        mVideoHeader.findViewById(R.id.movie_detail_back).setOnClickListener(this);
+        mVideoImage = ((ImageView) mVideoHeader.findViewById(R.id.movie_detail_video_image));
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == SCROLL_STATE_IDLE){
-                    Log.e(TAG, "onScrollStateChanged: " + mBottomFloat );
-                    ObjectAnimator.ofFloat(mBottomFloat,"TranslationY",1000,0).setDuration(2000).start();
+                    ObjectAnimator.ofFloat(mBottomFloat, "TranslationY", 1000,0).setDuration(2000).start();
                 }else{
-                    ObjectAnimator.ofFloat(mBottomFloat,"TranslationY",0,1000).setDuration(2000).start();
+                    ObjectAnimator.ofFloat(mBottomFloat,"TranslationY",1000).setDuration(1000).start();
                 }
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 //TODO 跟随滚动
+
             }
+
         });
     }
 
@@ -195,8 +212,11 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
         mDescrioption = (TextView) descriptionHeader.findViewById(R.id.movie_detail_description);
         mOpenDescription = (ImageView) descriptionHeader.findViewById(R.id.movie_detail_open_description);
         mOpenDescription.setOnClickListener(this);
-        mDescriptionImage = descriptionHeader.findViewById(R.id.movie_detail_image);
+        mDescriptionImage = (ImageView) descriptionHeader.findViewById(R.id.movie_detail_image);
         mRatingBar = ((RatingBar) descriptionHeader.findViewById(R.id.rb));
+        mDescriptionType = ((TextView) descriptionHeader.findViewById(R.id.movie_detail_description_type));
+        mDescriptionDuration = ((TextView) descriptionHeader.findViewById(R.id.movie_detail_description_duration));
+        mDescriptionEditor = ((TextView) descriptionHeader.findViewById(R.id.movie_detail_description_editor));
 
 //        mRatingBar.setClickable(true);//设置可否点击
 //        mRatingBar.setStar(2.5f);//设置显示的星星个数
@@ -226,7 +246,7 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
             mVideoView.setVideoURI(Uri.parse(homeDetailBeen.getObject().getMobilePreview()));
         }
         mVideoTitle.setText(homeDetailBeen.getObject().getName());
-        Picasso.with(this).load(homeDetailBeen.getObject().getLogo556640()).into(mVideoImageSmall);
+        Picasso.with(this).load(homeDetailBeen.getObject().getLogo556640()).into(mVideoImage);
         String releaseDate = homeDetailBeen.getObject().getReleaseDate();
         mMovieTime.setText(TimeUtil.converseReleaseTime(releaseDate) +"上映");
         mVideoCountry.setText("国家:  " + homeDetailBeen.getObject().getArea());
@@ -235,24 +255,29 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     private void updateMovieDescription(HomeDetailBeen homeDetailBeen) {
         mActors.setText(homeDetailBeen.getObject().getActors());
         mDescrioption.setText(homeDetailBeen.getObject().getDescription());
-        int rating = Integer.parseInt(homeDetailBeen.getObject().getGrade()) / 10;
+        float rating = Float.parseFloat(homeDetailBeen.getObject().getGrade()) / 10;
         mRatingBar.setStar(rating);//设置显示的星星个数
+        mDescriptionType.setText(homeDetailBeen.getObject().getCategory());
+        mDescriptionDuration.setText("时长 : " + homeDetailBeen.getObject().getDuration());
+        mDescriptionEditor.setText("导演 : " + homeDetailBeen.getObject().getDirector());
+        Picasso.with(this).load(homeDetailBeen.getObject().getLogo2()).into(mDescriptionImage);
     }
 
     @Override
     public void returnHomeDetailComment(HomeDetailCommentBeen homeDetailCommentBeen) {
+        Log.e(TAG, "returnHomeDetailComment: " );
         mListView.addHeaderView(inflater.inflate(R.layout.activity_movie_detail_header_comment,null,false));
         mAdapter.updateRes(homeDetailCommentBeen.getPosts());
     }
 
     @Override
     public void onStartLoad() {
-
+        LoadingDialog.showDialogForLoading(this);
     }
 
     @Override
     public void onStopLoad() {
-
+        LoadingDialog.cancelDialogForLoading();
     }
 
     @Override
@@ -275,27 +300,26 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
                     isArrowDown = true;
                 }
                 break;
-        }
-    }
-
-    @OnClick(value = {R2.id.movie_detail_video_play,R2.id.movie_detail_video_back,R2.id.movie_detail_video_share})
-    void onVideoClick(View v){
-        switch (v.getId()) {
-            case R.id.movie_detail_video_play:
+            case R.id.movie_detail_play:
                 //TODO 全屏,播放视频
                 videoStart();
                 break;
+            case R.id.movie_detail_back:
+                finish();
+                break;
+        }
+    }
+
+    @OnClick(value = {R2.id.movie_detail_video_back,R2.id.movie_detail_video_share})
+    void onVideoClick(View v){
+        switch (v.getId()) {
             case R.id.movie_detail_video_share:
                 //TODO 分享 ,待实现
                 Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.movie_detail_video_back:
-                if (isLandscape){
-                    //返回竖屏
-                    videoStop();
-                }else{
-                    finish();
-                }
+                //返回竖屏
+                videoStop();
                 break;
         }
 
@@ -307,15 +331,14 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
         mVideoView.pause();
         mVideoContainer.getLayoutParams().height = mVideoHeight;
         isLandscape = false;
-//        mVideoShare.setVisibility(View.VISIBLE);
-        mVideoPlay.setVisibility(View.VISIBLE);
-        mVideoImageSmall.setVisibility(View.VISIBLE);
+
         mBottomFloat.setVisibility(View.VISIBLE);
-//        mVideoSummary.setVisibility(View.VISIBLE);
         mVideoView.setMediaController(null);
+        mVideoContainer.setVisibility(View.GONE);
     }
 
     private void videoStart() {
+        mVideoContainer.setVisibility(View.VISIBLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         mVideoView.start();
@@ -324,11 +347,7 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
         mVideoContainer.getLayoutParams().height = FrameLayout.LayoutParams.MATCH_PARENT;
         isLandscape = true;
 
-//        mVideoShare.setVisibility(View.GONE);
-        mVideoPlay.setVisibility(View.GONE);
-        mVideoImageSmall.setVisibility(View.GONE);
         mBottomFloat.setVisibility(View.GONE);
-//        mVideoSummary.setVisibility(View.GONE);
         mVideoView.setMediaController(new MediaController(this));
     }
 

@@ -59,7 +59,6 @@ public class MoviePreviewFragment extends BaseFragment<HomePageModel, HomePagePr
 
         //网络获取数据
         mPresenter.getHomePageBeen(String.valueOf(type), String.valueOf(city));
-
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.apl.ticket.ui.moviedetail.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -29,7 +30,11 @@ public class MovieDetailAdapter extends ListViewBaseAdapter<HomeDetailPostData>{
     @Override
     protected void onBindData(ViewHolder holder, HomeDetailPostData homeDetailPostData, int position) {
         ImageView imageView = (ImageView) holder.findView(R.id.movie_detail_avatar_logo);
-        Picasso.with(context).load(homeDetailPostData.getAvatarUrl()).transform(new CropCircleTransformation()).into(imageView);
+        if (TextUtils.isEmpty(homeDetailPostData.getAvatarUrl())){//用户没有头像的情况
+            Picasso.with(context).load(R.mipmap.avtors_test).transform(new CropCircleTransformation()).into(imageView);
+        }else{
+            Picasso.with(context).load(homeDetailPostData.getAvatarUrl()).transform(new CropCircleTransformation()).into(imageView);
+        }
         holder.setText(R.id.movie_detail_avatar_name,homeDetailPostData.getNickName());
         holder.setText(R.id.movie_detail_avatar_comment,homeDetailPostData.getText());
         holder.setText(R.id.movie_detail_avatar_time,homeDetailPostData.getCreateTime());

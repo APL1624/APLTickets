@@ -66,7 +66,7 @@ public class StagePhotoAdapter extends RecyclerView.Adapter<StagePhotoAdapter.Vi
 
     @Override
     public int getItemCount() {
-        Log.e(TAG, "getItemCount: " + stagePhotos.size() );
+//        Log.e(TAG, "getItemCount: " + stagePhotos.size() );
         return stagePhotos != null? stagePhotos.size() : 0;
     }
 
