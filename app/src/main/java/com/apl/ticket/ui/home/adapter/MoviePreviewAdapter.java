@@ -42,7 +42,7 @@ public class MoviePreviewAdapter extends ListViewBaseAdapter<HomePageBeen.HPData
             }
         } else {
             if (TextUtils.equals(data.get(position).getReleaseDate().substring(5, 7), data.get(position - 1).getReleaseDate().substring(5, 7))) {
-                view.setVisibility(View.GONE);
+                view.setVisibility(View.INVISIBLE);
             } else {
                 int sum = 0;
                 for (int i = 0; i < data.size(); i++) {

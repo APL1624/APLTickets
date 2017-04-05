@@ -51,7 +51,7 @@ public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Fi
             holder.findView(R.id.cinema_imax).setVisibility(View.VISIBLE);
         }
         holder.setText(R.id.cinema_address,cinemaBeen.getAddress());
-        holder.setText(R.id.cinema_distance, DistanceUtil.getDistance(cinemaBeen.getCoord()));
+        holder.setText(R.id.cinema_distance, DistanceUtil.getDistance(cinemaBeen.getCoord(),116.0,40.0));
         holder.setText(R.id.cinema_play_count,cinemaBeen.getScreenings());
         holder.setText(R.id.cinema_low_price,"￥" + cinemaBeen.getLowPrice() + "起");
         if ("0".equals(cinemaBeen.getIsSeatSupport())){

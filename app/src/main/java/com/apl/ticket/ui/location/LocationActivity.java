@@ -30,6 +30,7 @@ import com.apl.ticket.ui.location.model.LocationModel;
 import com.apl.ticket.ui.location.presenter.LocationPresenter;
 import com.apl.ticket.ui.location.view.LetterView;
 import com.vittaw.mvplibrary.base.BaseActivity;
+import com.vittaw.mvplibrary.utils.DistanceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -179,6 +180,8 @@ public class LocationActivity extends BaseActivity<LocationPresenter,LocationMod
             if (aMapLocation.getErrorCode() == 0) {
 
                cityName.setText(aMapLocation.getCity());
+                Log.e(TAG, aMapLocation.getLongitude()+"156465");
+                Log.e(TAG, DistanceUtil.getDistance("116.370493156465,40.037135",aMapLocation.getLongitude(),aMapLocation.getLatitude()));
 
 
             } else {
