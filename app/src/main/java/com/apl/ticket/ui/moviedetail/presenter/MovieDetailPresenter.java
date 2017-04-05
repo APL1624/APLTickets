@@ -12,11 +12,11 @@ public class MovieDetailPresenter extends MovieDetailContract.Presenter {
 
     @Override
     public void getHomeDetail(String account_id, String movie_id, String city) {
-        mView.onStopLoad();
+        mView.onStartLoad();
         mModel.getHomeDetail(account_id,movie_id,city).subscribe(new Subscriber<HomeDetailBeen>() {
             @Override
             public void onCompleted() {
-
+                mView.onStopLoad();
             }
 
             @Override
@@ -29,7 +29,6 @@ public class MovieDetailPresenter extends MovieDetailContract.Presenter {
                 mView.returnHomeDetailBeen(homeDetailBeen);
             }
         });
-        mView.onStopLoad();
     }
 
     @Override
