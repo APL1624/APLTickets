@@ -1,9 +1,11 @@
 package com.apl.ticket.ui.home.fragment;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import com.apl.ticket.ui.home.adapter.MoviePreviewAdapter;
 import com.apl.ticket.ui.home.contract.MovieHotContract;
 import com.apl.ticket.ui.home.model.HomePageModel;
 import com.apl.ticket.ui.home.presenter.HomePagePresenter;
+import com.apl.ticket.ui.moviedetail.MovieDetailActivity;
 import com.vittaw.mvplibrary.base.BaseFragment;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,7 +30,7 @@ import butterknife.BindView;
  * FQC,cry,cry
  */
 
-public class MoviePreviewFragment extends BaseFragment<HomePageModel, HomePagePresenter> implements MovieHotContract.View, AbsListView.OnScrollListener {
+public class MoviePreviewFragment extends BaseFragment<HomePageModel, HomePagePresenter> implements MovieHotContract.View, AbsListView.OnScrollListener, AdapterView.OnItemClickListener {
 
 
     public static final String TAG = MoviePreviewFragment.class.getName();
@@ -56,6 +59,7 @@ public class MoviePreviewFragment extends BaseFragment<HomePageModel, HomePagePr
         //设置适配器
         mAdapter = new MoviePreviewAdapter(getActivity(), null, R.layout.fragment_movie_preview_item);
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(this);
 
         //网络获取数据
         mPresenter.getHomePageBeen(String.valueOf(type), String.valueOf(city));
@@ -111,5 +115,13 @@ public class MoviePreviewFragment extends BaseFragment<HomePageModel, HomePagePr
         } else {
             mHeadText.setText("最受关注电影");
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String movieId = mAdapter.getItem(position).getId();
+        Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+        intent.putExtra(MovieDetailActivity.MOVIE_ID,movieId);
+        getActivity().startActivity(intent);
     }
 }

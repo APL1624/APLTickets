@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.apl.ticket.R;
 import com.apl.ticket.been.HomePageBeen;
+import com.apl.ticket.ui.moviedetail.MovieDetailActivity;
 import com.apl.ticket.ui.selectseat.SelectSeat;
 import com.apl.ticket.ui.threatredetail.TheatreDetailActivity;
 import com.squareup.picasso.Picasso;
@@ -26,8 +28,6 @@ public class MoviePreviewAdapter extends ListViewBaseAdapter<HomePageBeen.HPData
 
     @Override
     protected void bindData(ViewHolder holder, List<HomePageBeen.HPData> data, int position) {
-
-
         View view = holder.findView(R.id.pre_head);
         if (position == 0 || position == 3) {
             view.setVisibility(View.VISIBLE);
@@ -66,13 +66,22 @@ public class MoviePreviewAdapter extends ListViewBaseAdapter<HomePageBeen.HPData
         if (!data.get(position).getIsScheduleSupport().equals("0")) {
             holder.findView(R.id.pre_item_new_movie).setVisibility(View.VISIBLE);
         }
-        holder.findView(R.id.pre_item_buy_ticket).setOnClickListener(this);
-        holder.findView(R.id.pre_item_buy_ticket).setTag(position);
+        Button button = (Button) holder.findView(R.id.pre_item_buy_ticket);
+        button.setTag(position);
+        button.setOnClickListener(this);
+        button.setFocusable(false);
     }
 
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.pre_item_buy_ticket://button的点击事件
+                int position = (Integer) v.getTag();
+                String movieId = getItem(position).getId();
+                Intent intent = new Intent(context, MovieDetailActivity.class);
+                intent.putExtra(MovieDetailActivity.MOVIE_ID,movieId);
+                context.startActivity(intent);
+        }
     }
 }

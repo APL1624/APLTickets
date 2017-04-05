@@ -28,7 +28,7 @@ public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Fi
     public CinemaAdapter(Context context, List<CinemaBeen> data, int layoutResId) {
         super(context, data, layoutResId);
         if (data != null){
-            backData = data;    //第一次传入的data是null
+            backData = data;//第一次传入的data是null
         }
         this.context=context;
     }
@@ -51,7 +51,8 @@ public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Fi
             holder.findView(R.id.cinema_imax).setVisibility(View.VISIBLE);
         }
         holder.setText(R.id.cinema_address,cinemaBeen.getAddress());
-        holder.setText(R.id.cinema_distance, DistanceUtil.getDistance(cinemaBeen.getCoord(),116.0,40.0));
+        //TODO 定位的经纬度坐标
+        holder.setText(R.id.cinema_distance, DistanceUtil.getDistance(cinemaBeen.getCoord(),40,116));
         holder.setText(R.id.cinema_play_count,cinemaBeen.getScreenings());
         holder.setText(R.id.cinema_low_price,"￥" + cinemaBeen.getLowPrice() + "起");
         if ("0".equals(cinemaBeen.getIsSeatSupport())){

@@ -30,6 +30,7 @@ import com.apl.ticket.R;
 import com.apl.ticket.R2;
 import com.apl.ticket.been.HomeDetailBeen;
 import com.apl.ticket.been.detailcomment.HomeDetailCommentBeen;
+import com.apl.ticket.ui.cinema.CinemaActivity;
 import com.apl.ticket.ui.moviedetail.adapter.MovieDetailAdapter;
 import com.apl.ticket.ui.moviedetail.adapter.StagePhotoAdapter;
 import com.apl.ticket.ui.moviedetail.contract.MovieDetailContract;
@@ -77,32 +78,11 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     @BindView(R2.id.movie_detail_video_share)
     ImageView mVideoBack;
 
-//    @BindView(R2.id.movie_detail_video_play)
-//    ImageView mVideoPlay;
-
     @BindView(R2.id.movie_detail_video_view)
     CustomVideoView mVideoView;
 
-//    @BindView(R2.id.movie_detail_video_title)
-//    TextView mVideoTitle;
-
-//    @BindView(R2.id.movie_detail_video_movie_time)
-//    TextView mMovieTime;
-//
-//    @BindView(R2.id.movie_detail_video_country)
-//    TextView mVideoCountry;
-
-//    @BindView(R2.id.movie_detail_video_share)
-//    ImageView mVideoShare;
-
-//    @BindView(R2.id.movie_detail_video_summary)
-//    LinearLayout mVideoSummary;
-
     @BindView(R2.id.movie_detail_float)
     LinearLayout mBottomFloat;
-
-//    @BindView(R2.id.movie_detail_video_image)
-//    ImageView mVideoImageSmall;
 
 
     private View mVideoHeader;
@@ -116,6 +96,7 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
     private TextView mDescriptionType;
     private TextView mDescriptionDuration;
     private TextView mDescriptionEditor;
+    private String movieId;
 
     @Override
     public int getLayoutId() {
@@ -144,7 +125,7 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
 
         //TODO accountId city
         Intent intent = getIntent();
-        String movieId = intent.getStringExtra(MOVIE_ID);
+        movieId = intent.getStringExtra(MOVIE_ID);
         mPresenter.getHomeDetail("",movieId,"110000");
         Map<String, String> map = createQuaryMap(movieId);
         mPresenter.getHomeDetailComment(map);
@@ -310,7 +291,7 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
         }
     }
 
-    @OnClick(value = {R2.id.movie_detail_video_back,R2.id.movie_detail_video_share})
+    @OnClick(value = {R2.id.movie_detail_video_back,R2.id.movie_detail_video_share,R2.id.movie_detail_float_buy})
     void onVideoClick(View v){
         switch (v.getId()) {
             case R.id.movie_detail_video_share:
@@ -321,8 +302,17 @@ public class MovieDetailActivity extends BaseActivity<MovieDetailPresenter,Movie
                 //返回竖屏
                 videoStop();
                 break;
+            case R.id.movie_detail_float_buy:
+                jumpToActivity();
+                break;
         }
 
+    }
+
+    private void jumpToActivity() {
+        Intent intent = new Intent(this, CinemaActivity.class);
+        intent.putExtra(CinemaActivity.MOVIE_ID,movieId);
+        startActivity(intent);
     }
 
     private void videoStop() {
