@@ -23,8 +23,8 @@
             <ImageView
                 android:id="@+id/location_fqc_ab_back"
                 android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:padding="10dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
                 android:src="@mipmap/location_pal_back" />
 
             <TextView

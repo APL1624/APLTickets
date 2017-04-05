@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/theatre_detail_linear_item_begin_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -20,6 +21,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/theatre_detail_linear_item_end_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="22:50结束" />

@@ -38,7 +38,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 
-public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,TheatreDetailModel>implements TheatreDetailContract.View, ViewPager.OnPageChangeListener, View.OnClickListener {
+public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,TheatreDetailModel>implements TheatreDetailContract.View, ViewPager.OnPageChangeListener, View.OnClickListener, TabLayout.OnTabSelectedListener {
     private static final String TAG =TheatreDetailActivity.class.getSimpleName() ;
     @BindView(R2.id.theatre_detail_item_one_gallery)
     ViewPager mViewPager;
@@ -115,20 +115,28 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
             CharSequence format = DateFormat.format("MM月dd日", c);
             tab.setText(format);
             mTabLayout.addTab(tab);
+
         }
         LinearLayout linearLayout = (LinearLayout) mTabLayout.getChildAt(0);
         linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
         linearLayout.setDividerDrawable(ContextCompat.getDrawable(this,
                 R.drawable.layout_divider_vertical));
         linearLayout.setDividerPadding(DensityUtils.dp2px(this,15));
-        for (int i = 0; i < 9; i++) {
+        mTabLayout.addOnTabSelectedListener(this);
+        for (int i = 0; i < threatreBean.getTicketUnitList().get(0).getTicketList().size(); i++) {
             View view = LayoutInflater.from(this).inflate(R.layout.theatre_detail_linear_item, null);
             LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DensityUtils.dp2px(this,70));
             view.setLayoutParams(params);
             Button btn = (Button) view.findViewById(R.id.theatre_detail_linear_item_btn);
+            TextView begin= (TextView) view.findViewById(R.id.theatre_detail_linear_item_begin_time);
+            TextView end= (TextView) view.findViewById(R.id.theatre_detail_linear_item_end_time);
+            begin.setText(threatreBean.getTicketUnitList().get(0).getTicketList().get(i).getShowTime());
+            end.setText(threatreBean.getTicketUnitList().get(0).getTicketList().get(i).getEndTime());
             btn.setOnClickListener(this);
             mLinearLayout.addView(view);
         }
+
+
 
 
     }
@@ -154,7 +162,6 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
     public void onClick(View view) {
         Log.e(TAG,"btnnnnnnn");
         switch (view.getId()) {
-
             case R.id.theatre_detail_linear_item_btn:
                 startActivity(new Intent(this, SelectSeat.class));
                 Log.e(TAG,"btn");
@@ -163,5 +170,23 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+
+        int position = tab.getPosition();
+        Log.e(TAG,position+"9999999999999999999999");
+
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
     }
 }
