@@ -136,3 +136,5 @@ eventBus 在activity和fragment之间传值,比接口回调好用,没有延时
     推代码 : 先更新,然后推到本地仓库(不需要网络),再push到gitHub(需要网络,在项目上右击)
     (需要配置gitHub账号密码等)
 
+-4.5周三-
+1.listView的item不要写成wrapContent,最好写成固定尺寸.比例布局也要在合适的地方用.
