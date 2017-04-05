@@ -2,6 +2,7 @@ package com.apl.ticket.ui.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -29,26 +30,27 @@ public class MoviePreviewAdapter extends ListViewBaseAdapter<HomePageBeen.HPData
     @Override
     protected void bindData(ViewHolder holder, List<HomePageBeen.HPData> data, int position) {
         View view = holder.findView(R.id.pre_head);
-        if (position == 0 || position == 3) {
+        if (position == 0 ||position==3) {
             view.setVisibility(View.VISIBLE);
-            if (position == 3) {
-                int sum = 0;
-                for (int i = 0; i < data.size(); i++) {
+            if(position==3){
+                int sum=0;
+                for (int i = 0; i <data.size() ; i++) {
                     if (data.get(position).getReleaseDate().substring(5, 7).equals(data.get(i).getReleaseDate().substring(5, 7))) {
                         sum++;
                     }
                 }
-                holder.setText(R.id.pre_head_text, data.get(position).getReleaseDate().substring(5, 7) + "月上映 （" + sum + "）部");
+                holder.setText(R.id.pre_head_text,data.get(position).getReleaseDate().substring(5,7)+"月上映 （"+sum+"）部");
             }
         } else {
             if (TextUtils.equals(data.get(position).getReleaseDate().substring(5, 7), data.get(position - 1).getReleaseDate().substring(5, 7))) {
-                view.setVisibility(View.INVISIBLE);
+
+                view.setBackgroundColor(Color.WHITE);
+                holder.setText(R.id.pre_head_text, "");
             } else {
                 int sum = 0;
                 for (int i = 0; i < data.size(); i++) {
                     if (data.get(position).getReleaseDate().substring(5, 7).equals(data.get(i).getReleaseDate().substring(5, 7))) {
                         sum++;
-                    } else {
                     }
                 }
                 holder.setText(R.id.pre_head_text, data.get(position).getReleaseDate().substring(5, 7) + "月上映 （" + sum + "）部");

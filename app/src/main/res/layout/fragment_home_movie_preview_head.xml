@@ -3,16 +3,17 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="30dp"
+    android:background="@color/color_gray_e"
     android:id="@+id/pre_head"
->
+   >
+
     <TextView
         android:id="@+id/pre_head_text"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="最受关注电影"
-        android:background="@color/color_gray_e"
+
         android:gravity="center_vertical"
         android:paddingLeft="5dp"/>
-
 
 </LinearLayout>
