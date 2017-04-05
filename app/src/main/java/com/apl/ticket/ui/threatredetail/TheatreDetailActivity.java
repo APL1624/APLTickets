@@ -177,6 +177,20 @@ public class TheatreDetailActivity extends BaseActivity<TheatreDetailPresenter,T
 
         int position = tab.getPosition();
         Log.e(TAG,position+"9999999999999999999999");
+        Log.e(TAG,threatreBean.getTicketUnitList().size()+"yyyyyyyyyyyyyyyyyy");
+        mLinearLayout.removeAllViews();
+        for (int i = position; i < threatreBean.getTicketUnitList().get(0).getTicketList().size(); i++) {
+            View view = LayoutInflater.from(this).inflate(R.layout.theatre_detail_linear_item, null);
+            LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,DensityUtils.dp2px(this,70));
+            view.setLayoutParams(params);
+            Button btn = (Button) view.findViewById(R.id.theatre_detail_linear_item_btn);
+            TextView begin= (TextView) view.findViewById(R.id.theatre_detail_linear_item_begin_time);
+            TextView end= (TextView) view.findViewById(R.id.theatre_detail_linear_item_end_time);
+            begin.setText(threatreBean.getTicketUnitList().get(0).getTicketList().get(i).getShowTime());
+            end.setText(threatreBean.getTicketUnitList().get(0).getTicketList().get(i).getEndTime());
+            btn.setOnClickListener(this);
+            mLinearLayout.addView(view);
+        }
 
     }
 
