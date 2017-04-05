@@ -1,6 +1,7 @@
 package com.apl.ticket.ui.home.fragment;
 
 import android.opengl.Visibility;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
@@ -129,17 +130,32 @@ public class MovieHotLargeFragment extends BaseFragment implements ViewPager.OnP
         if (mData!=null) {
             for (int i = 0; i < mData.getList().size()+2; i++) {
 //                Picasso.with(getActivity()).load(mData.getList().get(i).getLogo3()).into(imageView);
+                String logo3 = "";
                 if (i==0){
-                    data.add(new MovieHotLargeViewPagerFragment(mData.getList().get(mData.getList().size()-1).getLogo3())) ;
+                    logo3 = mData.getList().get(mData.getList().size() - 1).getLogo3();
+                    addFragment(data, logo3);
+
                 }else if (i==mData.getList().size()+1){
-                    data.add(new MovieHotLargeViewPagerFragment(mData.getList().get(0).getLogo3())) ;
+                    logo3 = mData.getList().get(0).getLogo3();
+                    addFragment(data,logo3);
                 }else{
-                    data.add(new MovieHotLargeViewPagerFragment(mData.getList().get(i-1).getLogo3())) ;
+                    logo3 =  mData.getList().get(i-1).getLogo3();
+                    addFragment(data,logo3);
                 }
+
+
             }
         }
         Logger.e("数据",data);
         return data;
+    }
+
+    private void addFragment(List<Fragment> data, String logo3) {
+        MovieHotLargeViewPagerFragment fragment = new MovieHotLargeViewPagerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(MovieHotLargeViewPagerFragment.IMAGE_URL,logo3);
+        fragment.setArguments(bundle);
+        data.add(fragment) ;
     }
 
     @Override

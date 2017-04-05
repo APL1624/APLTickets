@@ -60,7 +60,8 @@ public class MovieHotFragment extends BaseFragment<HomePageModel,HomePagePresent
         //发送sticky的event
         MovieHotLargeEvent movieHotLargeEvent = new MovieHotLargeEvent(EventWhat.GET_HOME_PAGE_BEEN);
         movieHotLargeEvent.setHomePageBeen(homePageBeen);
-        EventBus.getDefault().postSticky(movieHotLargeEvent);
+//        EventBus.getDefault().postSticky(movieHotLargeEvent);
+        EventBus.getDefault().post(movieHotLargeEvent);
 
         mAdapter.updateResAll(homePageBeen.getList());
     }

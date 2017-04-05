@@ -51,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="绝境崛起,大有不同"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="13sp"
             android:textColor="@color/color_gray_6"
             android:paddingTop="15dp"

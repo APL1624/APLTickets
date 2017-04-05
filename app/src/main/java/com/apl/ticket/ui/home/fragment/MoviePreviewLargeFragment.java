@@ -14,6 +14,9 @@ import com.apl.ticket.been.HomePageBeen;
 import com.apl.ticket.ui.home.EventBus.EventWhat;
 import com.apl.ticket.ui.home.EventBus.MovieHotLargeEvent;
 import com.apl.ticket.ui.home.adapter.MoviePreviewLargeAdapter;
+import com.apl.ticket.ui.home.contract.MovieHotContract;
+import com.apl.ticket.ui.home.model.HomePageModel;
+import com.apl.ticket.ui.home.presenter.HomePagePresenter;
 import com.apl.ticket.ui.home.transformer.ScaleTransformer;
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
@@ -33,11 +36,13 @@ import butterknife.BindView;
  * Created by Administrator on 2017/3/25 0025.
  */
 
-public class MoviePreviewLargeFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
+public class MoviePreviewLargeFragment extends BaseFragment<HomePageModel, HomePagePresenter>  implements ViewPager.OnPageChangeListener,MovieHotContract.View {
 
     public static final String TAG = MoviePreviewLargeFragment.class.getName();
     private MoviePreviewLargeAdapter adapter;
     private HomePageBeen mData;
+    private String city = "110000";
+    private String type = "1";
 
     @Override
     protected int getLayoutId() {
@@ -46,7 +51,7 @@ public class MoviePreviewLargeFragment extends BaseFragment implements ViewPager
 
     @Override
     protected void initPresenter() {
-
+        mPresenter.setVM(this, mModel);
     }
 
     @BindView(R2.id.home_movie_hot_viewPager)
@@ -55,7 +60,7 @@ public class MoviePreviewLargeFragment extends BaseFragment implements ViewPager
 
     @Override
     protected void initView() {
-
+        mPresenter.getHomePageBeen(String.valueOf(type), String.valueOf(city));
         adapter = new MoviePreviewLargeAdapter();
         mViewPager.setOffscreenPageLimit(3);
         int widthPixels = (int) getResources().getDisplayMetrics().widthPixels;
@@ -115,11 +120,7 @@ public class MoviePreviewLargeFragment extends BaseFragment implements ViewPager
     public void onEvent(MovieHotLargeEvent movieHotLargeEvent) {
         switch (movieHotLargeEvent.WHAT) {
             case EventWhat.GET_HP_DATA:
-                mData = movieHotLargeEvent.getHomePageBeen();
-                Logger.e("数据", mData);
-                getImageArray();
-                mViewPager.setCurrentItem(100, false);
-                setTextView(100);
+
                 break;
         }
     }
@@ -162,5 +163,30 @@ public class MoviePreviewLargeFragment extends BaseFragment implements ViewPager
         title.setText(mData.getList().get(position % size).getName());
         resurt.setText(mData.getList().get(position % size).getGrade());
         content.setText(mData.getList().get(position % size).getHighlight());
+    }
+
+    @Override
+    public void returnHomePageBeen(HomePageBeen homePageBeen) {
+        mData =homePageBeen;
+        Logger.e("数据", mData);
+        getImageArray();
+        mViewPager.setCurrentItem(100, false);
+        setTextView(100);
+
+    }
+
+    @Override
+    public void onStartLoad() {
+
+    }
+
+    @Override
+    public void onStopLoad() {
+
+    }
+
+    @Override
+    public void onError(String errorInfo) {
+
     }
 }

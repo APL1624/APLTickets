@@ -1,5 +1,6 @@
 package com.apl.ticket.ui.home.fragment;
 
+import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.apl.ticket.R;
@@ -23,11 +24,9 @@ import butterknife.BindView;
 
 public class MovieHotLargeViewPagerFragment extends BaseFragment {
 
-    private String imgURL;
+    public static final String IMAGE_URL = "image_url";
 
-    public MovieHotLargeViewPagerFragment( String imgURL) {
-        this.imgURL=imgURL;
-    }
+    public MovieHotLargeViewPagerFragment(){}
 
     @BindView(R2.id.movie_hot_large_img)
     ImageView imageView;
@@ -44,7 +43,11 @@ public class MovieHotLargeViewPagerFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+
+        Bundle bundle = getArguments();
+        String imageUrl = bundle.getString(IMAGE_URL);
+
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        Picasso.with(getActivity()).load(imgURL).into(imageView);
+        Picasso.with(getActivity()).load(imageUrl).into(imageView);
     }
 }
