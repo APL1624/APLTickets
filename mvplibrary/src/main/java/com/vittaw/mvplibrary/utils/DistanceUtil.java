@@ -1,5 +1,7 @@
 package com.vittaw.mvplibrary.utils;
 
+import java.util.Locale;
+
 /**
  * Created by Administrator on 2017/3/28 0028.
  */
@@ -15,7 +17,8 @@ public class DistanceUtil {
         double distance = getDistancess(Double.parseDouble(movieLongitude), Double.parseDouble(movieLatitude),
                 locationLongitude, locationLatitude);
 
-        return String.valueOf(distance + "km");
+        String format = String.format(Locale.CHINA,"%.2f", distance / 1000);//保留两位小数
+        return format + "km";
     }
 
     public static double getDistancess(double longitude1, double latitude1,

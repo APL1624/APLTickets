@@ -20,6 +20,7 @@ import com.apl.ticket.ui.home.model.FoundCircleModel;
 import com.apl.ticket.ui.home.presenter.FoundCirclePresenter;
 import com.orhanobut.logger.Logger;
 import com.vittaw.mvplibrary.base.BaseFragment;
+import com.vittaw.mvplibrary.utils.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -65,12 +66,12 @@ public class FoundCircleFragment extends BaseFragment<FoundCircleModel,FoundCirc
 
     @Override
     public void onStartLoad() {
-
+        LoadingDialog.showDialogForLoading(getActivity());
     }
 
     @Override
     public void onStopLoad() {
-
+        LoadingDialog.cancelDialogForLoading();
     }
 
     @Override

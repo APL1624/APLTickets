@@ -26,7 +26,7 @@ public class HomePagePresenter extends MovieHotContract.Presenter {
         mModel.getHomePageBeen(type,city).subscribe(new Subscriber<HomePageBeen>() {
             @Override
             public void onCompleted() {
-
+                mView.onStopLoad();
             }
 
             @Override
@@ -37,17 +37,13 @@ public class HomePagePresenter extends MovieHotContract.Presenter {
             @Override
             public void onNext(HomePageBeen homePageBeen) {
                 if (type=="0") {
-
                     mView.returnHomePageBeen(homePageBeen);
                 }else{
-
                     mView.returnHomePageBeen(getNewHomePageBeen(homePageBeen));
                 }
-
-
             }
         });
-        mView.onStopLoad();
+
     }
     public HomePageBeen getNewHomePageBeen(HomePageBeen homePageBeen){
         List<HomePageBeen.HPData> list = homePageBeen.getList();

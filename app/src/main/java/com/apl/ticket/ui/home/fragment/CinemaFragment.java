@@ -107,7 +107,7 @@ public class CinemaFragment extends BaseFragment<CinemaModel,CinemaPresenter> im
     private Map<String, String> getQueryMap() {
         //movie_id=48123&city=110000&longitude=118.074705&page_num=&page_no=&latitude=36.810581&apiVer=21&apilevel=17
         Map<String,String> map = new HashMap<>();
-        map.put("movie_id","48143");
+        map.put("movie_id","48440");
         map.put("city","110000");
         map.put("apiVer","21");
         map.put("apilevel","17");

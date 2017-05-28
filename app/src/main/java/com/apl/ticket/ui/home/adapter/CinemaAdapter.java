@@ -114,6 +114,7 @@ public class CinemaAdapter extends ListViewBaseAdapter<CinemaBeen> implements Fi
                 filterUpdate(backData);
             }
         }
+
     }
 
 }

@@ -69,11 +69,11 @@ public class FoundReadFragment extends BaseFragment<FoundReadModel,FoundReadPres
         tabAll.setName("全部");
         tabs.add(0, tabAll);
         for (int i = 0; i < tabs.size(); i++) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(tabs.get(i).getName()));
-            Bundle bundle = new Bundle();
-            bundle.putString(FoundReadContentFragment.TAG_ID,tabs.get(i).getId());
-            FoundReadContentFragment contentFragment = new FoundReadContentFragment();
-            contentFragment.setArguments(bundle);
+                mTabLayout.addTab(mTabLayout.newTab().setText(tabs.get(i).getName()));
+                Bundle bundle = new Bundle();
+                bundle.putString(FoundReadContentFragment.TAG_ID,tabs.get(i).getId());
+                FoundReadContentFragment contentFragment = new FoundReadContentFragment();
+                contentFragment.setArguments(bundle);
             fragments.add(contentFragment);
         }
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));

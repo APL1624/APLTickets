@@ -12,12 +12,12 @@ public abstract class BasePresenter<M extends BaseModel,V extends BaseView> {
 
     public V mView;
 
+
+
     public BasePresenter(){}
 
     public void setVM(V mView ,M mModel){
         this.mModel = mModel;
         this.mView = mView;
     }
-
-
 }

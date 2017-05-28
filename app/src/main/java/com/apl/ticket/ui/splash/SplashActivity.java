@@ -5,6 +5,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -26,6 +27,7 @@ import com.apl.ticket.ui.location.LocationActivity;
 import com.apl.ticket.ui.splash.contract.SplashContract;
 import com.apl.ticket.ui.splash.model.SplashModel;
 import com.apl.ticket.ui.splash.presenter.SplashPresenter;
+import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Picasso;
 import com.vittaw.mvplibrary.base.BaseActivity;
 import com.vittaw.mvplibrary.utils.DistanceUtil;
@@ -182,15 +184,17 @@ public class SplashActivity extends BaseActivity<SplashPresenter,SplashModel> im
 
             if (aMapLocation.getErrorCode() == 0) {
 
+
+//                SharedPreferences sharedPreferences = getSharedPreferences("", MODE_PRIVATE);
                 Log.e(TAG, aMapLocation.getLongitude()+"156465");
                 Log.e(TAG, DistanceUtil.getDistance("116.370493156465,40.037135",aMapLocation.getLongitude(),aMapLocation.getLatitude()));
 
 
             } else {
 
+                Logger.e("" + aMapLocation.getErrorCode());
                 Toast.makeText(this,"定位失败, ErrCode:"
-                        + aMapLocation.getErrorCode() + ", errInfo:"
-                        + aMapLocation.getErrorInfo(),Toast.LENGTH_SHORT
+                        + aMapLocation.getErrorCode() ,Toast.LENGTH_SHORT
                 ).show();
             }
         }

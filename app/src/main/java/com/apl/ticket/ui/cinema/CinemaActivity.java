@@ -37,7 +37,7 @@ public class CinemaActivity extends BaseActivity {
         FragmentTransaction transaction = fm.beginTransaction();
         CinemaFragment fragment = new CinemaFragment();
         Bundle bundle = new Bundle();
-        bundle.putString(MOVIE_ID,"48143");//TODO 这就是写死的,可以用eventBus
+        bundle.putString(MOVIE_ID,"48221");//TODO 这就是写死的,可以用eventBus
         fragment.setArguments(bundle);
         transaction.add(R.id.cinema_container, fragment);
         transaction.commit();

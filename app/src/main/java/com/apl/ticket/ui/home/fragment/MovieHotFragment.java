@@ -14,6 +14,7 @@ import com.apl.ticket.ui.home.adapter.MovieHotAdapter;
 import com.apl.ticket.ui.home.contract.MovieHotContract;
 import com.apl.ticket.ui.home.model.HomePageModel;
 import com.apl.ticket.ui.home.presenter.HomePagePresenter;
+import com.orhanobut.logger.Logger;
 import com.vittaw.mvplibrary.base.BaseFragment;
 import com.vittaw.mvplibrary.utils.LoadingDialog;
 
@@ -62,12 +63,14 @@ public class MovieHotFragment extends BaseFragment<HomePageModel,HomePagePresent
 
     @Override
     public void onStartLoad() {
-        LoadingDialog.showDialogForLoading(getActivity());
+        Log.e(TAG, "onStartLoad: " );
+//        LoadingDialog.showDialogForLoading(getActivity());
     }
 
     @Override
     public void onStopLoad() {
-        LoadingDialog.cancelDialogForLoading();
+        Log.e(TAG, "onStopLoad: " );
+//        LoadingDialog.cancelDialogForLoading();
     }
 
     @Override

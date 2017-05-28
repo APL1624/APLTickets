@@ -12,10 +12,11 @@ import rx.Subscriber;
 public class FoundCirclePresenter extends FoundCircleContract.Presenter {
     @Override
     public void getFoundCircleBoardBeen() {
+        mView.onStartLoad();
         mModel.getFoundCircleBoardBeen().subscribe(new Subscriber<FoundCircleBoardBeen>() {
             @Override
             public void onCompleted() {
-
+                mView.onStopLoad();
             }
 
             @Override
